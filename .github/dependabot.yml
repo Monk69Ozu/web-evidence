@@ -8,3 +8,10 @@ updates:
     groups:
       development-dependencies:
         dependency-type: development
+    ignore:
+      - dependency-name: commander
+        versions:
+          - ">=15.0.0"
+      - dependency-name: "@types/node"
+        update-types:
+          - version-update:semver-major
