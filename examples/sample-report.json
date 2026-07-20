@@ -1,0 +1,82 @@
+{
+  "schemaVersion": "1.0.0",
+  "scanner": { "name": "web-evidence", "version": "0.1.0" },
+  "scan": {
+    "target": "https://shop.example.test/",
+    "startedAt": "2026-07-21T08:00:00.000Z",
+    "finishedAt": "2026-07-21T08:00:02.200Z",
+    "durationMs": 2200,
+    "options": {
+      "rejectConsent": false,
+      "timeoutMs": 30000,
+      "settleMs": 1500,
+      "includeQuery": false,
+      "redactHost": false
+    }
+  },
+  "consent": {
+    "bannerDetected": true,
+    "rejectControlDetected": true,
+    "rejectAttempted": false,
+    "rejectTriggered": false,
+    "controlLabel": "reject all",
+    "note": "Observation only. No consent control was activated."
+  },
+  "document": {
+    "title": "Synthetic example shop",
+    "language": "en",
+    "h1Count": 1,
+    "imageCount": 4,
+    "imagesMissingAlt": 1,
+    "formControlCount": 2,
+    "unlabeledFormControls": 0,
+    "privacyLinkDetected": true,
+    "legalNoticeLinkDetected": true
+  },
+  "accessibility": {
+    "engine": "axe-core",
+    "engineVersion": "4.12.1",
+    "violationCount": 1,
+    "affectedNodeCount": 1,
+    "byImpact": { "serious": 1 },
+    "violations": [
+      {
+        "id": "image-alt",
+        "impact": "serious",
+        "help": "Images must have alternative text",
+        "helpUrl": "https://dequeuniversity.com/rules/axe/4.12/image-alt",
+        "affectedNodes": 1,
+        "targets": ["main img.product"]
+      }
+    ]
+  },
+  "network": [
+    {
+      "phase": "initial",
+      "method": "GET",
+      "resourceType": "script",
+      "url": "https://www.google-analytics.com/g/collect",
+      "host": "www.google-analytics.com",
+      "thirdParty": true,
+      "tracker": { "id": "google-analytics", "name": "Google Analytics", "category": "analytics" }
+    }
+  ],
+  "cookies": [],
+  "findings": [
+    {
+      "id": "tracker-before-choice",
+      "title": "Known tracker endpoints observed before a consent action",
+      "severity": "high",
+      "summary": "Technical network evidence was recorded during the initial, untouched page load.",
+      "evidenceCount": 1,
+      "legalConclusion": false
+    }
+  ],
+  "warnings": [],
+  "dataPolicy": {
+    "responseBodiesStored": false,
+    "cookieValuesStored": false,
+    "queryStringsStored": false,
+    "legalAdvice": false
+  }
+}

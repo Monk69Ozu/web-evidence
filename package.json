@@ -1,0 +1,70 @@
+{
+  "name": "web-evidence",
+  "version": "0.1.0",
+  "description": "Evidence-first, self-hosted diagnostics for privacy, consent, accessibility, and document hygiene.",
+  "type": "module",
+  "main": "./lib/index.js",
+  "types": "./lib/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./lib/index.d.ts",
+      "import": "./lib/index.js"
+    }
+  },
+  "bin": {
+    "web-evidence": "lib/cli.js"
+  },
+  "files": [
+    "lib",
+    "schema",
+    "docs",
+    "examples",
+    "README.md",
+    "LICENSE",
+    "NOTICE",
+    "CHANGELOG.md"
+  ],
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "check": "npm run typecheck && npm test && npm run build",
+    "scan": "tsx src/cli.ts",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "typecheck": "tsc -p tsconfig.check.json --noEmit"
+  },
+  "engines": {
+    "node": ">=20.11"
+  },
+  "keywords": [
+    "accessibility",
+    "audit",
+    "consent",
+    "cookies",
+    "privacy",
+    "playwright",
+    "wcag"
+  ],
+  "license": "Apache-2.0",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Monk69Ozu/web-evidence.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Monk69Ozu/web-evidence/issues"
+  },
+  "homepage": "https://github.com/Monk69Ozu/web-evidence#readme",
+  "publishConfig": {
+    "access": "public"
+  },
+  "dependencies": {
+    "axe-core": "^4.12.1",
+    "commander": "14.0.2",
+    "playwright": "^1.61.1"
+  },
+  "devDependencies": {
+    "@types/node": "^22.15.30",
+    "tsx": "^4.23.1",
+    "typescript": "^7.0.2",
+    "vitest": "^4.1.10"
+  }
+}

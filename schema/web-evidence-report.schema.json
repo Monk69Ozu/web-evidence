@@ -1,0 +1,91 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/Monk69Ozu/web-evidence/blob/main/schema/web-evidence-report.schema.json",
+  "title": "Web Evidence Report",
+  "description": "Technical web observations. This schema does not express legal conclusions.",
+  "type": "object",
+  "required": ["schemaVersion", "scanner", "scan", "consent", "document", "accessibility", "network", "cookies", "findings", "warnings", "dataPolicy"],
+  "properties": {
+    "schemaVersion": { "const": "1.0.0" },
+    "scanner": {
+      "type": "object",
+      "required": ["name", "version"],
+      "properties": {
+        "name": { "const": "web-evidence" },
+        "version": { "type": "string" }
+      },
+      "additionalProperties": false
+    },
+    "scan": {
+      "type": "object",
+      "required": ["target", "startedAt", "finishedAt", "durationMs", "options"],
+      "properties": {
+        "target": { "type": "string", "format": "uri" },
+        "startedAt": { "type": "string", "format": "date-time" },
+        "finishedAt": { "type": "string", "format": "date-time" },
+        "durationMs": { "type": "integer", "minimum": 0 },
+        "options": { "type": "object" }
+      }
+    },
+    "consent": { "type": "object" },
+    "document": { "type": "object" },
+    "accessibility": { "type": ["object", "null"] },
+    "network": { "type": "array", "items": { "$ref": "#/$defs/networkEvidence" } },
+    "cookies": { "type": "array", "items": { "$ref": "#/$defs/cookieEvidence" } },
+    "findings": { "type": "array", "items": { "$ref": "#/$defs/finding" } },
+    "warnings": { "type": "array", "items": { "type": "string" } },
+    "dataPolicy": {
+      "type": "object",
+      "required": ["responseBodiesStored", "cookieValuesStored", "queryStringsStored", "legalAdvice"],
+      "properties": {
+        "responseBodiesStored": { "const": false },
+        "cookieValuesStored": { "const": false },
+        "queryStringsStored": { "type": "boolean" },
+        "legalAdvice": { "const": false }
+      },
+      "additionalProperties": false
+    }
+  },
+  "$defs": {
+    "networkEvidence": {
+      "type": "object",
+      "required": ["phase", "method", "resourceType", "url", "host", "thirdParty", "tracker"],
+      "properties": {
+        "phase": { "enum": ["initial", "after_reject"] },
+        "method": { "type": "string" },
+        "resourceType": { "type": "string" },
+        "url": { "type": "string" },
+        "host": { "type": "string" },
+        "thirdParty": { "type": "boolean" },
+        "tracker": { "type": ["object", "null"] }
+      }
+    },
+    "cookieEvidence": {
+      "type": "object",
+      "required": ["phase", "name", "domain", "path", "secure", "httpOnly", "sameSite", "session"],
+      "properties": {
+        "phase": { "enum": ["initial", "after_reject"] },
+        "name": { "type": "string" },
+        "domain": { "type": "string" },
+        "path": { "type": "string" },
+        "secure": { "type": "boolean" },
+        "httpOnly": { "type": "boolean" },
+        "sameSite": { "type": "string" },
+        "session": { "type": "boolean" }
+      }
+    },
+    "finding": {
+      "type": "object",
+      "required": ["id", "title", "severity", "summary", "evidenceCount", "legalConclusion"],
+      "properties": {
+        "id": { "type": "string" },
+        "title": { "type": "string" },
+        "severity": { "enum": ["info", "low", "medium", "high", "critical"] },
+        "summary": { "type": "string" },
+        "evidenceCount": { "type": "integer", "minimum": 0 },
+        "legalConclusion": { "const": false }
+      },
+      "additionalProperties": false
+    }
+  }
+}
